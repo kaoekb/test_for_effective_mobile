@@ -2,7 +2,7 @@
 Description=Run test process monitoring every minute
 
 [Timer]
-OnBootSec=5min
+OnBootSec=1min
 OnUnitActiveSec=1min
 Unit=test-monitor.service
 
