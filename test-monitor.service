@@ -1,0 +1,12 @@
+[Unit]
+Description=Monitor the test process and report to monitoring server
+After=network.target
+
+[Service]
+ExecStart=/path/to/monitoring.sh
+Restart=always
+User=root
+Environment=PATH=/usr/bin:/bin
+
+[Install]
+WantedBy=multi-user.target
