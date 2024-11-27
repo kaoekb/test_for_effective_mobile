@@ -3,7 +3,7 @@ Description=Monitor the test process and report to monitoring server
 After=network.target
 
 [Service]
-ExecStart=/path/to/monitoring.sh
+ExecStart=/root/test_for_effective_mobile/monitoring.sh
 Restart=always
 User=root
 Environment=PATH=/usr/bin:/bin
