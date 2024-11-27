@@ -5,6 +5,9 @@ After=network.target
 [Service]
 ExecStart=/root/test_for_effective_mobile/monitoring.sh
 Restart=always
+RestartSec=60
+StartLimitIntervalSec=500
+StartLimitBurst=3
 User=root
 Environment=PATH=/usr/bin:/bin
 

@@ -4,6 +4,8 @@ LOG_FILE="/var/log/monitoring.log"
 MONITOR_URL="https://test.com/monitoring/test/api"
 PROCESS_NAME="test"
 
+echo "Starting monitoring script at $(date)" >> /var/log/monitoring.log
+
 if pgrep -x "$PROCESS_NAME" > /dev/null; then
     LAST_PID=$(pgrep -x "$PROCESS_NAME" | head -n 1)
 
