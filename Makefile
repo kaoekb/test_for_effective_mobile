@@ -32,6 +32,7 @@ status:
 logs:
 	@sudo tail -f /var/log/monitoring.log
 clean:
+	@echo " "
 	@echo "Stopping and disabling the service and timer..."
 	@sudo systemctl stop test-monitor.timer || echo "Failed to stop test-monitor.timer"
 	@sudo systemctl stop test-monitor.service || echo "Failed to stop test-monitor.service"
