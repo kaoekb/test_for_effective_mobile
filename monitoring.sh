@@ -2,7 +2,7 @@
 
 LOG_FILE="/var/log/monitoring.log"
 MONITOR_URL="https://test.com/monitoring/test/api"
-PROCESS_NAME="test"
+PROCESS_NAME="test.sh"
 PID_FILE="/var/run/test_pid.txt"
 
 log_message() {

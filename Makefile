@@ -3,7 +3,7 @@ TIMER_FILE = test-monitor.timer
 SERVICE_DEST = /etc/systemd/system/test-monitor.service
 TIMER_DEST = /etc/systemd/system/test-monitor.timer
 LOG_FILE = /var/log/monitoring.log
-TEST_FILE = test
+TEST_FILE = test.sh
 
 install: copy-files enable-service start-service
 
@@ -11,7 +11,7 @@ copy-files:
 	@echo "Copying service and timer files..."
 	@cp $(SERVICE_FILE) $(SERVICE_DEST)
 	@cp $(TIMER_FILE) $(TIMER_DEST)
-	# @chmod +x $(TEST_FILE)
+	@chmod +x $(TEST_FILE)
 
 enable-service:
 	@echo "Reloading systemd daemon and enabling service..."
