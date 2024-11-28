@@ -22,7 +22,7 @@ start-service:
 	@echo "Starting the timer and service..."
 	@sudo systemctl start test-monitor.timer
 	@sudo systemctl start test-monitor.service
-	@sudo ./$(TEST_FILE) &
+	@sudo ./$(TEST_FILE) || echo "Failed to start test process" >> $(LOG_FILE)
 
 status:
 	@echo "Checking the status of the service..."
@@ -39,6 +39,7 @@ clean:
 	@echo "Removing service and timer files..."
 	@sudo rm -f $(SERVICE_DEST)
 	@sudo rm -f $(TIMER_DEST)
+	@pkill -f test
 	@sudo rm -f $(TEST_FILE)
 
 	@echo "Removing logs..."
