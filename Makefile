@@ -11,7 +11,7 @@ copy-files:
 	@echo "Copying service and timer files..."
 	@cp $(SERVICE_FILE) $(SERVICE_DEST)
 	@cp $(TIMER_FILE) $(TIMER_DEST)
-	chmod +x $(TEST_FILE)
+	@chmod +x $(TEST_FILE)
 
 enable-service:
 	@echo "Reloading systemd daemon and enabling service..."
@@ -22,7 +22,7 @@ start-service:
 	@echo "Starting the timer and service..."
 	@sudo systemctl start test-monitor.timer
 	@sudo systemctl start test-monitor.service
-	@sudo bash -c './$(TEST_FILE) & || echo "Failed to start test process" >> $(LOG_FILE)'
+    @if ! sudo ./$(TEST_FILE); then echo "Failed to start test process" >> $(LOG_FILE); fi
 
 status:
 	@echo "Checking the status of the service..."
