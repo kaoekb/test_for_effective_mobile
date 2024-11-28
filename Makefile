@@ -8,28 +8,33 @@ TEST_FILE = test.sh
 install: copy-files enable-service start-service
 
 copy-files:
+	@echo " "
 	@echo "Copying service and timer files..."
 	@cp $(SERVICE_FILE) $(SERVICE_DEST)
 	@cp $(TIMER_FILE) $(TIMER_DEST)
 	@chmod +x $(TEST_FILE)
 
 enable-service:
+	@echo " "
 	@echo "Reloading systemd daemon and enabling service..."
 	@sudo systemctl daemon-reload
 	@sudo systemctl enable test-monitor.timer
 
 start-service:
+	@echo " "
 	@echo "Starting the timer and service..."
 	@sudo systemctl start test-monitor.timer
 	@sudo systemctl start test-monitor.service
 	@sudo ./$(TEST_FILE) || echo "Failed to start test process" >> $(LOG_FILE)
 
 status:
+	@echo " "
 	@echo "Checking the status of the service..."
 	@sudo systemctl status test-monitor.service
 	@sudo journalctl -u test-monitor.service
 
 logs:
+	@echo " "
 	@sudo tail -f /var/log/monitoring.log
 clean:
 	@echo " "
@@ -57,6 +62,7 @@ clean:
 
 
 clear-logs:
+	@echo " "
 	@echo "Clearing logs..."
 	@sudo rm -f $(LOG_FILE)
 	@echo "Logs cleared."
