@@ -22,7 +22,7 @@ start-service:
 	@echo "Starting the timer and service..."
 	@sudo systemctl start test-monitor.timer
 	@sudo systemctl start test-monitor.service
-    @if ! sudo ./$(TEST_FILE); then echo "Failed to start test process" >> $(LOG_FILE); fi
+	@sudo ./$(TEST_FILE) &
 
 status:
 	@echo "Checking the status of the service..."
