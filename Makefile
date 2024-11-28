@@ -31,24 +31,29 @@ status:
 
 logs:
 	@sudo tail -f /var/log/monitoring.log
-
 clean:
 	@echo "Stopping and disabling the service and timer..."
-	@sudo systemctl stop test-monitor.timer
-	@sudo systemctl stop test-monitor.service
-	@sudo systemctl disable test-monitor.timer
-	@sudo systemctl disable test-monitor.service
+	@sudo systemctl stop test-monitor.timer || echo "Failed to stop test-monitor.timer"
+	@sudo systemctl stop test-monitor.service || echo "Failed to stop test-monitor.service"
+	@sudo systemctl disable test-monitor.timer || echo "Failed to disable test-monitor.timer"
+	@sudo systemctl disable test-monitor.service || echo "Failed to disable test-monitor.service"
+	@sudo systemctl daemon-reload || echo "Failed to reload systemd daemon"
 
 	@echo "Removing service and timer files..."
-	@sudo rm -f $(SERVICE_DEST)
-	@sudo rm -f $(TIMER_DEST)
-	@pkill -f $(TEST_FILE)
-	@sudo rm -f $(TEST_FILE)
+	@sudo rm -f $(SERVICE_DEST) || echo "Failed to remove service file"
+	@sudo rm -f $(TIMER_DEST) || echo "Failed to remove timer file"
+
+	@echo "Killing any processes related to $(TEST_FILE)..."
+	@pkill -f $(TEST_FILE) || echo "No processes to kill for $(TEST_FILE)"
+
+	@echo "Removing test script..."
+	@sudo rm -f $(TEST_FILE) || echo "Failed to remove test file"
 
 	@echo "Removing logs..."
-	@sudo rm -f $(LOG_FILE)
+	@sudo rm -f $(LOG_FILE) || echo "Failed to remove log file"
 
 	@echo "System cleanup complete."
+
 
 clear-logs:
 	@echo "Clearing logs..."
