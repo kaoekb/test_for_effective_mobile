@@ -3,7 +3,7 @@ TIMER_FILE = test-monitor.timer
 SERVICE_DEST = /etc/systemd/system/test-monitor.service
 TIMER_DEST = /etc/systemd/system/test-monitor.timer
 LOG_FILE = /var/log/monitoring.log
-TEST_FILE = test.sh
+TEST_FILE = test
 
 install: copy-files enable-service start-service
 
@@ -29,6 +29,9 @@ status:
 	@sudo systemctl status test-monitor.service
 	@sudo journalctl -u test-monitor.service
 
+logs:
+	@sudo tail -f /var/log/monitoring.log
+
 clean:
 	@echo "Stopping and disabling the service and timer..."
 	@sudo systemctl stop test-monitor.timer
@@ -39,7 +42,7 @@ clean:
 	@echo "Removing service and timer files..."
 	@sudo rm -f $(SERVICE_DEST)
 	@sudo rm -f $(TIMER_DEST)
-	@pkill -f test
+	@pkill -f $(TEST_FILE)
 	@sudo rm -f $(TEST_FILE)
 
 	@echo "Removing logs..."
