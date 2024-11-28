@@ -11,7 +11,7 @@ copy-files:
 	@echo "Copying service and timer files..."
 	@cp $(SERVICE_FILE) $(SERVICE_DEST)
 	@cp $(TIMER_FILE) $(TIMER_DEST)
-	@chmod +x $(TEST_FILE)
+	# @chmod +x $(TEST_FILE)
 
 enable-service:
 	@echo "Reloading systemd daemon and enabling service..."
